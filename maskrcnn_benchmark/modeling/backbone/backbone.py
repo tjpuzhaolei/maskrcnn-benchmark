@@ -24,8 +24,10 @@ def build_resnet_backbone(cfg):
 @registry.BACKBONES.register("R-101-FPN")
 @registry.BACKBONES.register("R-152-FPN")
 def build_resnet_fpn_backbone(cfg):
-    body = resnet.ResNet(cfg)
-    in_channels_stage2 = cfg.MODEL.RESNETS.RES2_OUT_CHANNELS
+    # body = resnet.ResNet(cfg)
+    body = mobilenet.MobileNetV2(cfg)
+    # in_channels_stage2 = cfg.MODEL.RESNETS.RES2_OUT_CHANNELS
+    # out_channels = cfg.MODEL.RESNETS.BACKBONE_OUT_CHANNELS
     out_channels = cfg.MODEL.RESNETS.BACKBONE_OUT_CHANNELS
     fpn = fpn_module.FPN(
         in_channels_list=[
