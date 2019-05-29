@@ -8,16 +8,12 @@ class DatasetCatalog(object):
     DATA_DIR = "/data_sharing/data41_data1/zl9/fashion-2019/"
     # DATA_DIR = "/Users/zl/Documents/fashion-2019/maskscoring_rcnn/fashion_data/train/"
     DATASETS = {
-        # "coco_2017_train": (
-        #     "images",
-        #     "instances_fashion_va2019.json",
-        # ),
-        # "coco_2017_val": ("images", "instances_fashion_val2019.json"),
-        "coco_2017_train": (
+        "coco_2017_train": {
             "train",
             "fashion_coco/instances_fashion_train2019.json",
-        ),
-        "coco_2017_val": ("val", "fashion_coco/instances_fashion_val2019.json"),
+        },
+        "coco_2017_val": {"val", "fashion_coco/instances_fashion_val2019.json"},
+
         "coco_2014_train": {
             "img_dir": "coco/train2014",
             "ann_file": "coco/annotations/instances_train2014.json"
