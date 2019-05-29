@@ -2,7 +2,7 @@
 from collections import OrderedDict
 
 from torch import nn
-
+from . import mobilenet
 from maskrcnn_benchmark.modeling import registry
 from maskrcnn_benchmark.modeling.make_layers import conv_with_kaiming_uniform
 from . import fpn as fpn_module
@@ -48,7 +48,8 @@ def build_resnet_fpn_backbone(cfg):
 @registry.BACKBONES.register("R-50-FPN-RETINANET")
 @registry.BACKBONES.register("R-101-FPN-RETINANET")
 def build_resnet_fpn_p3p7_backbone(cfg):
-    body = resnet.ResNet(cfg)
+    # body = resnet.ResNet(cfg)
+    body = mobilenet.MobileNetV2(cfg)
     in_channels_stage2 = cfg.MODEL.RESNETS.RES2_OUT_CHANNELS
     out_channels = cfg.MODEL.RESNETS.BACKBONE_OUT_CHANNELS
     in_channels_p6p7 = in_channels_stage2 * 8 if cfg.MODEL.RETINANET.USE_C5 \
