@@ -10,7 +10,7 @@ class DatasetCatalog(object):
     DATASETS = {
         "coco_2017_train": {
             "train",
-            "fashion_coco/instances_fashion_train2019.json",
+            "fashion_coco/instances_fashion_train2019.json"
         },
         "coco_2017_val": {"val", "fashion_coco/instances_fashion_val2019.json"},
 
