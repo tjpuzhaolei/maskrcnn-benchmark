@@ -95,7 +95,7 @@ _C.MODEL.BACKBONE = CN()
 # The string must match a function that is imported in modeling.model_builder
 # (e.g., 'FPN.add_fpn_ResNet101_conv5_body' to specify a ResNet-101-FPN
 # backbone)
-_C.MODEL.BACKBONE.CONV_BODY = "R-50-C4"
+_C.MODEL.BACKBONE.CONV_BODY = "R-50-FPN"
 
 # Add StopGrad at a specified stage so the bottom layers are frozen
 _C.MODEL.BACKBONE.FREEZE_CONV_BODY_AT = 2
