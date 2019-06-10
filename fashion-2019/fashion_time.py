@@ -29,12 +29,11 @@ class FashionPredictor(object):
     ):
         self.res_label_mask_scorse = []
         self.res_dir = './res_person/'
-        config_file = "../configs/e2e_fashion_rcnn_R_101_FPN_1x.yaml"
-        # config_file = "../configs/e2e_fashion_ms_rcnn_R_50_FPN_1x.yaml"
+        config_file = "../configs/e2e_fashion_mask_rcnn_R_50_FPN_1x.yaml"
         cfg.merge_from_file(config_file)  # 设置配置文件
         cfg.merge_from_list(["MODEL.MASK_ON", True])
-        cfg.merge_from_list(["MODEL.DEVICE", "cpu"])  # 指定为CPU
-        # cfg.merge_from_list(["MODEL.DEVICE", "cuda"])  # 指定为GPU
+        # cfg.merge_from_list(["MODEL.DEVICE", "cpu"])  # 指定为CPU
+        cfg.merge_from_list(["MODEL.DEVICE", "cuda"])  # 指定为GPU
 
         self.cfg = cfg.clone()
         self.model = build_detection_model(cfg)
@@ -55,7 +54,7 @@ class FashionPredictor(object):
         # used to make colors for each class
         self.palette = torch.tensor([2 ** 25 - 1, 2 ** 15 - 1, 2 ** 21 - 1])
 
-        self.cpu_device = torch.device("cpu")
+        self.cpu_device = self.device
         self.confidence_threshold = confidence_threshold
         self.show_mask_heatmaps = show_mask_heatmaps
         self.masks_per_dim = masks_per_dim
@@ -145,8 +144,8 @@ def main():
         confidence_threshold=0.5,
     )
 
-    # image_path = '/data1/zl9/fashion-2019/test/'
-    image_path = '/Users/zl/Documents/fashion-2019/maskscoring_rcnn/data/fashion_test/test/'
+    image_path = '/data_sharing/data41_data1/zl9/fashion-2019/test/'
+    # image_path = '/Users/zl/Documents/fashion-2019/maskscoring_rcnn/data/fashion_test/test/'
     from glob import glob
     image_list = glob(image_path + '*.*')
 
