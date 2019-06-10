@@ -32,8 +32,8 @@ class FashionPredictor(object):
         config_file = "../configs/e2e_fashion_mask_rcnn_R_50_FPN_1x.yaml"
         cfg.merge_from_file(config_file)  # 设置配置文件
         cfg.merge_from_list(["MODEL.MASK_ON", True])
-        # cfg.merge_from_list(["MODEL.DEVICE", "cpu"])  # 指定为CPU
-        cfg.merge_from_list(["MODEL.DEVICE", "cuda"])  # 指定为GPU
+        cfg.merge_from_list(["MODEL.DEVICE", "cpu"])  # 指定为CPU
+        # cfg.merge_from_list(["MODEL.DEVICE", "cuda"])  # 指定为GPU
 
         self.cfg = cfg.clone()
         self.model = build_detection_model(cfg)
@@ -54,7 +54,7 @@ class FashionPredictor(object):
         # used to make colors for each class
         self.palette = torch.tensor([2 ** 25 - 1, 2 ** 15 - 1, 2 ** 21 - 1])
 
-        self.cpu_device = self.device
+
         self.confidence_threshold = confidence_threshold
         self.show_mask_heatmaps = show_mask_heatmaps
         self.masks_per_dim = masks_per_dim
@@ -108,7 +108,7 @@ class FashionPredictor(object):
         # compute predictions
         with torch.no_grad():
             predictions = self.model(image_list)
-        predictions = [o.to(self.cpu_device) for o in predictions]
+        predictions = [o.to(self.device) for o in predictions]
 
         # always single image is passed at a time
         prediction = predictions[0]
