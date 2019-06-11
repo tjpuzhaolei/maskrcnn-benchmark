@@ -32,8 +32,8 @@ class FashionPredictor(object):
         config_file = "../configs/e2e_fashion_mask_rcnn_R_50_FPN_1x.yaml"
         cfg.merge_from_file(config_file)  # 设置配置文件
         cfg.merge_from_list(["MODEL.MASK_ON", True])
-        # cfg.merge_from_list(["MODEL.DEVICE", "cpu"])  # 指定为CPU
-        cfg.merge_from_list(["MODEL.DEVICE", "cuda"])  # 指定为GPU
+        cfg.merge_from_list(["MODEL.DEVICE", "cpu"])  # 指定为CPU
+        # cfg.merge_from_list(["MODEL.DEVICE", "cuda"])  # 指定为GPU
 
         self.cfg = cfg.clone()
         self.model = build_detection_model(cfg)
