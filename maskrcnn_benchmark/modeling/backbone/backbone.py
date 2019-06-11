@@ -60,7 +60,7 @@ def build_resnet_fpn_backbone(cfg):
             0,
             32,
             96,
-            320,
+            160,
         ],
         out_channels=out_channels,
         conv_block=conv_with_kaiming_uniform(
