@@ -5,16 +5,19 @@ import os
 
 
 class DatasetCatalog(object):
-    DATA_DIR = "/data_sharing/data41_data1/zl9/fashion-2019/"
+    # DATA_DIR = "/data_sharing/data41_data1/zl9/fashion-2019/"
+    DATA_DIR = "/data_sharing/data41_data1/zl9/fashion-2019/train_person/"
     # DATA_DIR = "/Users/zl/Documents/fashion-2019/maskscoring_rcnn/fashion_data/train/"
     DATASETS = {
         "coco_2017_train": {
             "img_dir": "train",
-            "ann_file": "fashion_coco/instances_fashion_train2019.json"
+            # "ann_file": "fashion_coco/instances_fashion_train2019.json"
+            "ann_file": "json/instances_fashion_train2019.json"
         },
         "coco_2017_val": {
             "img_dir":"val",
-            "ann_file":"fashion_coco/instances_fashion_val2019.json"
+            # "ann_file":"fashion_coco/instances_fashion_val2019.json"
+            "ann_file":"json/instances_fashion_val2019.json"
         },
         "coco_2014_train": {
             "img_dir": "coco/train2014",
