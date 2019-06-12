@@ -144,7 +144,8 @@ def main():
         confidence_threshold=0.5,
     )
 
-    image_path = '/data_sharing/data41_data1/zl9/fashion-2019/test/'
+    image_path = '/data_sharing/data41_data1/zl9/fashion-2019/train_person/val/'
+    # image_path = '/data_sharing/data41_data1/zl9/fashion-2019/test/'
     # image_path = '/Users/zl/Documents/fashion-2019/maskscoring_rcnn/data/fashion_test/test/'
     from glob import glob
     image_list = glob(image_path + '*.*')
