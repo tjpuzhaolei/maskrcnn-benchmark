@@ -99,17 +99,25 @@ class FashionPredictor(object):
                 of the detection properties can be found in the fields of
                 the BoxList via `prediction.fields()`
         """
+        st = time.time()
         # apply pre-processing to image
         image = self.transforms(original_image)
+        print('pre-processing time:',time.time() - st)
+
+        st = time.time()
         # convert to an ImageList, padded so that it is divisible by
         # cfg.DATALOADER.SIZE_DIVISIBILITY
         image_list = to_image_list(image, self.cfg.DATALOADER.SIZE_DIVISIBILITY)
         image_list = image_list.to(self.device)
+        print('convert to an ImageList time:', time.time() - st)
+
+        st = time.time()
         # compute predictions
         with torch.no_grad():
             predictions = self.model(image_list)
         predictions = [o.to(self.device) for o in predictions]
-
+        print('compute predictions time:', time.time() - st)
+        
         # always single image is passed at a time
         prediction = predictions[0]
 
@@ -128,6 +136,7 @@ class FashionPredictor(object):
 
     def predict(self, image_path):
         image = cv2.imread(image_path)
+
         s_time = time.time()
 
         predictions = self.compute_prediction(image)
@@ -159,7 +168,7 @@ def main():
             img_time = fashion_demo.predict(img_path)
             all_time += img_time
             all_num += 1
-            if all_num > 20:
+            if all_num > 40:
                 break
         except Exception as e:
             print(e)
