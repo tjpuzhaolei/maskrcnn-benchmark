@@ -58,8 +58,8 @@ def build_resnet_fpn_backbone(cfg):
     fpn = fpn_module.FPN(
         in_channels_list=[
             0,
-            0,
-            96,
+            32,
+            64,
             160,
         ],
         out_channels=out_channels,
