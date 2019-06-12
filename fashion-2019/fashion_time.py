@@ -149,7 +149,7 @@ class FashionPredictor(object):
 def main():
     fashion_demo = FashionPredictor(  # 创建模型文件
         # min_image_size=1200,
-        min_image_size=400,
+        min_image_size=800,
         confidence_threshold=0.5,
     )
 
