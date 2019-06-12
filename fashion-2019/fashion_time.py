@@ -167,6 +167,7 @@ def main():
         try:
             img_time = fashion_demo.predict(img_path)
             all_time += img_time
+            print('\n')
             all_num += 1
             if all_num > 40:
                 break
