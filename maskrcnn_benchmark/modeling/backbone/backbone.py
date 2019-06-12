@@ -59,7 +59,7 @@ def build_resnet_fpn_backbone(cfg):
         in_channels_list=[
             0,
             32,
-            64,
+            96,
             160,
         ],
         out_channels=out_channels,
