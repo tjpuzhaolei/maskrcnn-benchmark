@@ -83,7 +83,7 @@ class FashionPredictor(object):
                 T.ToPILImage(),
                 T.Resize(self.min_image_size),
                 T.ToTensor(),
-                to_bgr_transform,
+                # to_bgr_transform,
                 normalize_transform,
             ]
         )
