@@ -95,7 +95,7 @@ class MobileNetV2(nn.Module):
             if c == 96:
                 self.layer_14 = nn.Sequential(*features)
                 features = []
-            if c == 160:
+            if c == 320:
                 self.layer_7 = nn.Sequential(*features)
                 features = []
 
