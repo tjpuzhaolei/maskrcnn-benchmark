@@ -11,6 +11,7 @@ dist/
 *.pth
 *.pkl
 *.npy
+*.jpg
 
 # ipython/jupyter notebooks
 *.ipynb

@@ -69,7 +69,7 @@ class MobileNetV2(nn.Module):
             [6, 64, 4, 2],  # 32x28x28 -> 64x14x14
             [6, 96, 3, 1],  # 64x14x14 -> 96x14x14
             [6, 160, 3, 2],  # 96x14x14 -> 160x7x7
-            # [6, 320, 1, 1],  # 160x7x7 -> 320x7x7
+            [6, 320, 1, 1],  # 160x7x7 -> 320x7x7
         ]
 
         # building first layer
@@ -95,7 +95,7 @@ class MobileNetV2(nn.Module):
             if c == 96:
                 self.layer_14 = nn.Sequential(*features)
                 features = []
-            if c == 160:
+            if c == 320:
                 self.layer_7 = nn.Sequential(*features)
                 features = []
 
