@@ -13,7 +13,7 @@ class DatasetCatalog(object):
             "img_dir": "train",
             # "ann_file": "fashion_coco/instances_fashion_train2019.json"
             # "ann_file": "fashion_coco/instances_fashion_train2018_v2.json"
-            # "ann_file": "json/instances_fashion_train2019.json"
+            "ann_file": "json/instances_fashion_train2019.json"
         },
         "coco_2017_val": {
             "img_dir":"val",
