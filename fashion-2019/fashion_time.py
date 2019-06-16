@@ -7,8 +7,8 @@ import random
 import time
 import numpy as np
 
-from torchvision import transforms as T
-
+# from torchvision import transforms as T
+from maskrcnn_benchmark.data.transforms import transforms_zl as T
 from maskrcnn_benchmark.modeling.detector import build_detection_model
 from maskrcnn_benchmark.utils.checkpoint import DetectronCheckpointer
 from maskrcnn_benchmark.structures.image_list import to_image_list
@@ -32,8 +32,8 @@ class FashionPredictor(object):
         config_file = "../configs/e2e_fashion_mask_rcnn_R_50_FPN_1x.yaml"
         cfg.merge_from_file(config_file)  # 设置配置文件
         cfg.merge_from_list(["MODEL.MASK_ON", True])
-        # cfg.merge_from_list(["MODEL.DEVICE", "cpu"])  # 指定为CPU
-        cfg.merge_from_list(["MODEL.DEVICE", "cuda"])  # 指定为GPU
+        cfg.merge_from_list(["MODEL.DEVICE", "cpu"])  # 指定为CPU
+        # cfg.merge_from_list(["MODEL.DEVICE", "cuda"])  # 指定为GPU
 
         self.cfg = cfg.clone()
         self.model = build_detection_model(cfg)
@@ -69,10 +69,10 @@ class FashionPredictor(object):
         # to BGR, they are already! So all we need to do is to normalize
         # by 255 if we want to convert to BGR255 format, or flip the channels
         # if we want it to be in RGB in [0-1] range.
-        if cfg.INPUT.TO_BGR255:
-            to_bgr_transform = T.Lambda(lambda x: x * 255)
-        else:
-            to_bgr_transform = T.Lambda(lambda x: x[[2, 1, 0]])
+        # if cfg.INPUT.TO_BGR255:
+        #     to_bgr_transform = T.Lambda(lambda x: x * 255)
+        # else:
+        #     to_bgr_transform = T.Lambda(lambda x: x[[2, 1, 0]])
 
         normalize_transform = T.Normalize(
             mean=cfg.INPUT.PIXEL_MEAN, std=cfg.INPUT.PIXEL_STD
@@ -83,7 +83,7 @@ class FashionPredictor(object):
                 T.ToPILImage(),
                 T.Resize(self.min_image_size),
                 T.ToTensor(),
-                to_bgr_transform,
+                # to_bgr_transform,
                 normalize_transform,
             ]
         )
@@ -153,9 +153,9 @@ def main():
         confidence_threshold=0.5,
     )
 
-    image_path = '/data_sharing/data41_data1/zl9/fashion-2019/train_person/val/'
+    # image_path = '/data_sharing/data41_data1/zl9/fashion-2019/train_person/val/'
     # image_path = '/data_sharing/data41_data1/zl9/fashion-2019/test/'
-    # image_path = '/Users/zl/Documents/fashion-2019/maskscoring_rcnn/data/fashion_test/test/'
+    image_path = '/Users/zl/Documents/fashion-2019/maskscoring_rcnn/data/fashion_test/test/'
     from glob import glob
     image_list = glob(image_path + '*.*')
 
@@ -169,7 +169,7 @@ def main():
             all_time += img_time
             print('\n')
             all_num += 1
-            if all_num > 40:
+            if all_num > 10:
                 break
         except Exception as e:
             print(e)

@@ -6,12 +6,14 @@ _ext
 maskrcnn_benchmark.egg-info/
 build/
 dist/
+/fashion-2019/
 
 # pytorch/python/numpy formats
 *.pth
 *.pkl
 *.npy
 *.jpg
+*.png
 
 # ipython/jupyter notebooks
 *.ipynb
