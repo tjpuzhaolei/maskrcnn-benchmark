@@ -4,6 +4,7 @@ import math
 import sys
 import random
 from PIL import Image
+
 try:
     import accimage
 except ImportError:
@@ -11,6 +12,7 @@ except ImportError:
 import numpy as np
 import numbers
 import types
+import time
 import collections
 import warnings
 
@@ -22,7 +24,6 @@ if sys.version_info < (3, 3):
 else:
     Sequence = collections.abc.Sequence
     Iterable = collections.abc.Iterable
-
 
 __all__ = ["Compose", "ToTensor", "ToPILImage", "Normalize", "Resize", "Scale", "CenterCrop", "Pad",
            "Lambda", "RandomApply", "RandomChoice", "RandomOrder", "RandomCrop", "RandomHorizontalFlip",
@@ -111,6 +112,7 @@ class ToPILImage(object):
 
     .. _PIL.Image mode: https://pillow.readthedocs.io/en/latest/handbook/concepts.html#concept-modes
     """
+
     def __init__(self, mode=None):
         self.mode = mode
 
@@ -173,8 +175,11 @@ class Normalize(object):
 
     def __call__(self, image, target=None):
         if self.to_bgr255:
+            st = time.time()
             image = image * 255
+
         image = F.normalize(image, mean=self.mean, std=self.std)
+        print('image = image * 255 time:', time.time() - st)
 
         return image
 
@@ -216,6 +221,7 @@ class Scale(Resize):
     """
     Note: This transform is deprecated in favor of Resize.
     """
+
     def __init__(self, *args, **kwargs):
         warnings.warn("The use of the transforms.Scale transform is deprecated, " +
                       "please use transforms.Resize instead.")
@@ -304,7 +310,7 @@ class Pad(object):
         return F.pad(img, self.padding, self.fill, self.padding_mode)
 
     def __repr__(self):
-        return self.__class__.__name__ + '(padding={0}, fill={1}, padding_mode={2})'.\
+        return self.__class__.__name__ + '(padding={0}, fill={1}, padding_mode={2})'. \
             format(self.padding, self.fill, self.padding_mode)
 
 
@@ -381,6 +387,7 @@ class RandomApply(RandomTransforms):
 class RandomOrder(RandomTransforms):
     """Apply a list of transformations in a random order
     """
+
     def __call__(self, img):
         order = list(range(len(self.transforms)))
         random.shuffle(order)
@@ -392,6 +399,7 @@ class RandomOrder(RandomTransforms):
 class RandomChoice(RandomTransforms):
     """Apply single transformation randomly picked from a list
     """
+
     def __call__(self, img):
         t = random.choice(self.transforms)
         return t(img)
@@ -627,6 +635,7 @@ class RandomSizedCrop(RandomResizedCrop):
     """
     Note: This transform is deprecated in favor of RandomResizedCrop.
     """
+
     def __init__(self, *args, **kwargs):
         warnings.warn("The use of the transforms.RandomSizedCrop transform is deprecated, " +
                       "please use transforms.RandomResizedCrop instead.")
@@ -778,6 +787,7 @@ class ColorJitter(object):
             hue_factor is chosen uniformly from [-hue, hue] or the given [min, max].
             Should have 0<= hue <= 0.5 or -0.5 <= min <= max <= 0.5.
     """
+
     def __init__(self, brightness=0, contrast=0, saturation=0, hue=0):
         self.brightness = self._check_input(brightness, 'brightness')
         self.contrast = self._check_input(contrast, 'contrast')
