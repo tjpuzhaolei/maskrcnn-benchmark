@@ -89,7 +89,10 @@ class ToTensor(object):
         Returns:
             Tensor: Converted image.
         """
-        return F.to_tensor(pic)
+        stt = time.time()
+        pic_tensor = F.to_tensor(pic)
+        print('tensor time:', time.time() - stt)
+        return pic_tensor
 
     def __repr__(self):
         return self.__class__.__name__ + '()'
@@ -125,7 +128,10 @@ class ToPILImage(object):
             PIL Image: Image converted to PIL Image.
 
         """
-        return F.to_pil_image(pic, self.mode)
+        stp = time.time()
+        pic_pil = F.to_pil_image(pic, self.mode)
+        print('pic_pil = F.to_pil_image(pic, self.mode) time:', time.time() - stp)
+        return pic_pil
 
     def __repr__(self):
         format_string = self.__class__.__name__ + '('
