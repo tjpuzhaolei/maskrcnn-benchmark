@@ -218,7 +218,7 @@ class Resize(object):
         """
         ss = time.time()
         img_size = F.resize(img, self.size, self.interpolation)
-        print('image size:', time.time() - img_size)
+        print('image size:', time.time() - ss)
         return img_size
 
     def __repr__(self):
