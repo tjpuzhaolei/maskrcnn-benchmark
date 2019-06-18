@@ -136,7 +136,7 @@ class FashionPredictor(object):
 
     def predict(self, image_path):
         image = cv2.imread(image_path)
-
+        print('image shape :',image.shape)
         s_time = time.time()
 
         predictions = self.compute_prediction(image)
