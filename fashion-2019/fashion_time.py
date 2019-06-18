@@ -99,10 +99,10 @@ class FashionPredictor(object):
                 of the detection properties can be found in the fields of
                 the BoxList via `prediction.fields()`
         """
-        st = time.time()
+        spt = time.time()
         # apply pre-processing to image
         image = self.transforms(original_image)
-        print('pre-processing time:',time.time() - st)
+        print('pre-processing time:',time.time() - spt)
 
         st = time.time()
         # convert to an ImageList, padded so that it is divisible by
